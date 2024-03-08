@@ -69,7 +69,7 @@ int main() {
                 default:
                   puts("Choix invalide");
                 break;
-    
+            }
         }
     } else {
         printf("\nNom d'utilisateur ou mot de passe incorrect.\n");
