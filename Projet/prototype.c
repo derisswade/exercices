@@ -64,7 +64,7 @@ void menuAdministration (){
       puts("= \t\t1. Gestion des Etudiants\t\t=");
       puts("= \t\t2. Génération de fichiers\t\t=");
       puts("= \t\t3. Marquer les présences\t\t=");
-      puts("= \t\t4. Envoyer un message\t\t\t\t=");
+      puts("= \t\t4. Envoyer un message\t\t\t=");
       puts("= \t\t5. Quitter\t\t\t\t=");
       puts("===================================================================="); 
       puts("Veuillez choisir une option : ");  
