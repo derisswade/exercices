@@ -8,6 +8,7 @@
 int main() {
     char username[MAX_USERNAME_LENGTH];
     char password[MAX_PASSWORD_LENGTH];
+    int choix;
     
     // Demander à l'utilisateur de saisir un nom d'utilisateur
     printf("Entrez votre nom d'utilisateur : ");
@@ -24,8 +25,51 @@ int main() {
     if (userID != -1) {
         if (isAdmin == 1) {
             printf("\nConnexion réussie en tant qu'administrateur. ID_User: %d\n", userID);
+            menuAdministration();
+            scanf("%d",&choix);
+            system("clear");
+            switch (choix) {
+                case 1:
+                    puts("Gestion des Etudiants");
+                    break;
+                case 2:
+                    puts("Génération de fichiers");
+                    break;
+                case 3:
+                    puts("Marquer les présences");
+                    break;
+                case 4:
+                   puts("Envoyer un message");
+                    break;
+                case 5:
+                    puts("Au revoir !");
+                    break;
+                default:
+                  puts("Choix invalide");
+                break;
+            }
         } else {
             printf("\nConnexion réussie en tant qu'étudiant. ID_User: %d\n", userID);
+            menuEtudiant();
+            scanf("%d",&choix);
+            system("clear");
+            switch (choix) {
+                case 1:
+                    puts("Marquer ma présence");
+                    break;
+                case 2:
+                    puts("Nombre de minutes d'abscence");
+                    break;
+                case 3:
+                    puts("Mes Messages (0)");
+                    break;
+                case 4:
+                   puts("Au revoir!");
+                    break;
+                default:
+                  puts("Choix invalide");
+                break;
+    
         }
     } else {
         printf("\nNom d'utilisateur ou mot de passe incorrect.\n");

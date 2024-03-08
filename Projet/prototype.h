@@ -10,4 +10,7 @@ int Authentifier(char *username, char *password, int *isAdmin);
 // Fonction pour masquer les caractères saisis par des étoiles
 void masquerMotDePasse(char *password);
 
+void menuAdministration ();
+void menuEtudiant ();
+
 #endif /* PROTOTYPE_H */
