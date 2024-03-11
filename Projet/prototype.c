@@ -435,6 +435,7 @@ void genererFichierListePresenceParDate(const char *nomFichierListePresence, con
         printf("Erreur lors de l'ouverture du fichier de présence.\n");
         return;
     }
+    
 
     // Construire le nom du fichier de sortie avec la date spécifiée
     snprintf(nomFichierSortie, sizeof(nomFichierSortie), "ListePresenceDuDate_%s.txt", dateEntree);
