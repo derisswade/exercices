@@ -10,11 +10,14 @@ int main()
 {
     char username[MAX_USERNAME_LENGTH];
     char password[MAX_PASSWORD_LENGTH];
-    int choix, idEtudiant;
+    int choix, choix2, idEtudiant;
     int idUtilisateurConnecte;
     int connecte = 0;
     int isAdmin;
     int userID;
+    Etudiant etudiants[MAX_ETUDIANTS];
+    int numEtudiants = lireDonneesEtudiants(etudiants, MAX_ETUDIANTS);
+    char dateEntree[30];
 
     do
     {
@@ -24,14 +27,13 @@ int main()
             printf("Entrez votre nom d'utilisateur : ");
             fgets(username, MAX_USERNAME_LENGTH, stdin);
             username[strcspn(username, "\n")] = '\0'; // Supprimer le retour à la ligne
-            
 
             // Demander à l'utilisateur de saisir un mot de passe (masqué)
 
             masquerMotDePasse(password);
 
             // Vérifier les informations d'identification
-            
+
             int userID = Authentifier(username, password, &isAdmin, &idUtilisateurConnecte);
             if (userID != -1)
             {
@@ -60,6 +62,35 @@ int main()
                         break;
                     case 2:
                         puts("Génération de fichiers");
+                        do
+                        {
+                            menuGenerationdeFichier();
+                            scanf("%d", &choix2);
+                            switch (choix2)
+                            {
+                            case 1:
+                                genererFichierListePresence(etudiants, numEtudiants);
+                                break;
+                            case 2:
+                                puts("Génération de fichiers par date donneé");
+                                printf("Entrez la date au format jj/mm/aaaa : ");
+                                scanf("%s", dateEntree);
+                                genererFichierListePresenceParDate("listeDePresence.txt", dateEntree);
+                                break;
+                            case 3:
+                                 puts("Au revoir");
+                                break;
+                            default:
+                                printf("Choix invalide\n");
+                                break;
+                            }
+                                if (choix2==3)
+                                {
+                                break;
+                                }
+                                
+                        } while (1);
+
                         break;
                     case 3:
                         puts("Marquer les présences");
@@ -85,8 +116,13 @@ int main()
 
                         break;
                     case 4:
+                        /* Etudiant etudiants[MAX_ETUDIANTS];
+                        int numEtudiants = lireDonneesEtudiants(etudiants, MAX_ETUDIANTS);
+                        char message [MAX_LENGHT_MESSAGE]; */
                         puts("Envoyer un message");
-                        break;
+                        /* envoyerMessage(etudiants , numEtudiants);
+                        envoyerBroadcast(message , etudiants ,numEtudiants);
+                        break; */
                     case 5:
                         puts("Au revoir !");
                         connecte = 0;
@@ -124,7 +160,7 @@ int main()
                             // Vérifier si l'utilisateur a entré 'q' pour quitter
                             if (tolower(choix1[0]) == 'q')
                             {
-                                
+
                                 break; // Quitter le programme
                             }
 
@@ -164,6 +200,6 @@ int main()
                 } while (choix != 4);
             }
         }
-    }while (1);
+    } while (1);
     return 0;
 }

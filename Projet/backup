@@ -1,69 +1,37 @@
+void envoyerMessage(Etudiant etudiants[], int numEtudiants) {
+    int choix;
+    printf("Choisissez une option d'envoi de message :\n");
+    printf("1. Envoi par broadcast\n");
+    printf("2. Envoi par classe\n");
+    printf("3. Envoi à des étudiants spécifiques\n");
+    printf("Votre choix : ");
+    scanf("%d", &choix);
 
-    // Demander à l'utilisateur de saisir un nom d'utilisateur
-    printf("Entrez votre nom d'utilisateur : ");
-    fgets(username, MAX_USERNAME_LENGTH, stdin);
-    username[strcspn(username, "\n")] = '\0'; // Supprimer le retour à la ligne
-
-    // Demander à l'utilisateur de saisir un mot de passe (masqué)
-
-    masquerMotDePasse(password);
-
-    // Vérifier les informations d'identification
-    int isAdmin;
-    int userID = Authentifier(username, password, &isAdmin, &idUtilisateurConnecte);
-    if (userID != -1)
-    {
-        if (isAdmin == 1)
-        {
-            do
-            {
-                printf("\nConnexion réussie en tant qu'administrateur. ID_User: %d\n", userID);
-                menuAdministration();
-                scanf("%d", &choix);
-                /* system("clear"); */
-                switch (choix)
-                {
-                case 1:
-                    puts("Gestion des Etudiants");
-                    break;
-                case 2:
-                    puts("Génération de fichiers");
-                    break;
-                case 3:
-                    puts("Marquer les présences");
-                    puts(" ");
-                    Etudiant etudiants[MAX_ETUDIANTS];
-                    int numEtudiants = lireDonneesEtudiants(etudiants, MAX_ETUDIANTS);
-
-                    // Affichage des étudiants non marqués présents
-                    printf("Liste des étudiants non marqués présents :\n");
-                    for (int i = 0; i < numEtudiants; i++)
-                    {
-                        if (!etudiants[i].present)
-                        {
-                            printf("%d. %s\n", etudiants[i].id, etudiants[i].nom);
-                        }
-                    }
-
-                    // Marquage de la présence des étudiants
-                    marquerPresence(etudiants, numEtudiants);
-
-                    // Enregistrement des données mises à jour dans le fichier
-                    sauvegarderDonneesEtudiants(etudiants, numEtudiants);
-
-                    break;
-                case 4:
-                    puts("Envoyer un message");
-                    break;
-                case 5:
-                    puts("Au revoir !");
-                    break;
-                default:
-                    puts("Choix invalide");
-
-                    break;
-                }
-            } while (choix != 5);
+    switch (choix) {
+        case 1: {
+            char message[100]; // Définir la taille du message
+            printf("Entrez le message à envoyer en broadcast : ");
+            scanf(" %[^\n]s", message); // Lire le message jusqu'au retour à la ligne
+            envoyerBroadcast(message, etudiants, numEtudiants);
+            break;
         }
+        case 2:
+            /* envoyerParClasse(); */
+            break;
+        case 3:
+            /* envoyerParEtudiants(); */
+            break;
+        default:
+            printf("Choix invalide\n");
+            break;
+    }
+}
 
-        
+void envoyerBroadcast(const char *message, Etudiant etudiants[], int numEtudiants) {
+    printf("Message envoyé en broadcast : %s\n", message);
+    // Envoyer le message à tous les étudiants
+    for (int i = 0; i < numEtudiants; i++) {
+        // Envoyer le message à l'étudiant i
+        printf("Message envoyé à l'étudiant %s %s (ID: %d)\n", etudiants[i].prenom, etudiants[i].nom, etudiants[i].id);
+    }
+}
