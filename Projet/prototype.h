@@ -16,6 +16,7 @@
 #define MAX_LONGUEUR_ID 5
 #define MAX_LENGHT_MESSAGE 255
 #define MAX_MESSAGES_RECEIVED 100
+#define MAX_LENGHT 1000
 
 typedef struct {
     int id;
@@ -53,6 +54,6 @@ void genererNomMois(int mois, char *nomMois);
 void genererFichierListePresence(Etudiant etudiants[], int numEtudiants);
 int validerFormatDate(const char *date);
 void genererFichierListePresenceParDate(const char *nomFichierListePresence, const char *dateEntree);
-
-
+/* void reinitialiserPresenceEtudiants(); */
+void reinitialiserPresenceEtudiants(const char *nomFichier);
 #endif /* PROTOTYPE_H */

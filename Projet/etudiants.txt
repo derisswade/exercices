@@ -1,8 +1,8 @@
 1234 Idrissa Wade DEV/WEB-MOBILE 1
 1345 Abdou Fall DEV/DATA 1
-1253 Fanta Tine DEV/WEB-MOBILE 1
-5692 Khaby Lam REF-DIG 0
+1253 Fanta Tine DEV/WEB-MOBILE 0
+5692 Khaby Lam REF-DIG 1
 3572 Helicia Tsika DEV/DATA 1
 3356 Fatoumata Dicko DEV/DATA 1
 5357 Ibrahima Faye DEV/DATA 1
-6342 Astou Fall DEV/WEB-MOBILE 1
+6342 Astou Fall DEV/WEB-MOBILE 0

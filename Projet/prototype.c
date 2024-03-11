@@ -468,3 +468,75 @@ void genererFichierListePresenceParDate(const char *nomFichierListePresence, con
 
     printf("Fichier de présence généré avec succès pour la date %s.\n", dateEntree);
 }
+
+void reinitialiserPresenceEtudiants(const char *nomFichier) {
+    // Lire la date de la dernière réinitialisation depuis listeDePresence.txt
+    FILE *fichier = fopen("listeDePresence.txt", "r");
+    if (fichier == NULL) {
+        printf("Erreur lors de l'ouverture du fichier listeDePresence.txt.\n");
+        return;
+    }
+
+    char derniereDate[11];  // Supposons que la date est stockée sur 10 caractères (jj/mm/aaaa)
+    if (fgets(derniereDate, sizeof(derniereDate), fichier) == NULL) {
+        printf("Erreur lors de la lecture de la dernière date de réinitialisation.\n");
+        fclose(fichier);
+        return;
+    }
+    fclose(fichier);
+
+    // Convertir la date lue en une structure tm
+    struct tm derniereDateStruct = {0};
+    if (sscanf(derniereDate, "%d/%d/%d", &derniereDateStruct.tm_mday, &derniereDateStruct.tm_mon, &derniereDateStruct.tm_year) != 3) {
+        printf("Erreur lors de la conversion de la dernière date de réinitialisation.\n");
+        return;
+    }
+    derniereDateStruct.tm_mon--; // Mois commencent à 0
+    derniereDateStruct.tm_year -= 1900; // Année depuis 1900
+
+    // Obtenir la date actuelle
+    time_t tempsActuel;
+    time(&tempsActuel);
+    struct tm *dateActuelle = localtime(&tempsActuel);
+
+    // Comparer les dates
+    if (dateActuelle->tm_mday != derniereDateStruct.tm_mday ||
+        dateActuelle->tm_mon != derniereDateStruct.tm_mon ||
+        dateActuelle->tm_year != derniereDateStruct.tm_year) {
+        // Les dates sont différentes, réinitialiser les présences des étudiants
+        // Code pour réinitialiser les présences dans le fichier etudiants.txt
+        printf("Réinitialisation des présences effectuée.\n");
+    } else {
+        // Les dates sont identiques, pas besoin de réinitialiser les présences
+        printf("Pas besoin de réinitialiser les présences.\n");
+    }
+}
+
+/* void reinitialiserPresenceEtudiants() {
+    FILE *fichier = fopen("etudiants.txt", "r+");
+    if (fichier == NULL) {
+        printf("Erreur lors de l'ouverture du fichier etudiants.txt.\n");
+        return;
+    }
+
+    Etudiant etudiants[MAX_ETUDIANTS];
+    int numEtudiants = 0;
+
+    // Lire les étudiants depuis le fichier
+    while (fscanf(fichier, "%d %s %s %s %d", &etudiants[numEtudiants].id, etudiants[numEtudiants].prenom, etudiants[numEtudiants].nom, etudiants[numEtudiants].classe, &etudiants[numEtudiants].present) == 5) {
+        // Réinitialiser la présence à 0
+        etudiants[numEtudiants].present = 0;
+        numEtudiants++;
+    }
+
+    // Réécrire les étudiants dans le fichier
+    rewind(fichier);
+    for (int i = 0; i < numEtudiants; i++) {
+        fprintf(fichier, "%d %s %s %s %d\n", etudiants[i].id, etudiants[i].prenom, etudiants[i].nom, etudiants[i].classe, etudiants[i].present);
+    }
+
+    fclose(fichier);
+
+    printf("Réinitialisation de la présence des étudiants effectuée avec succès.\n");
+}
+ */

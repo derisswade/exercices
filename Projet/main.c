@@ -21,6 +21,7 @@ int main()
 
     do
     {
+        int userID = Authentifier(username, password, &isAdmin, &idUtilisateurConnecte);
         if (!connecte)
         {
             // Demander à l'utilisateur de saisir un nom d'utilisateur
@@ -78,17 +79,17 @@ int main()
                                 genererFichierListePresenceParDate("listeDePresence.txt", dateEntree);
                                 break;
                             case 3:
-                                 puts("Au revoir");
+                                puts("Au revoir");
                                 break;
                             default:
                                 printf("Choix invalide\n");
                                 break;
                             }
-                                if (choix2==3)
-                                {
+                            if (choix2 == 3)
+                            {
                                 break;
-                                }
-                                
+                            }
+
                         } while (1);
 
                         break;
@@ -100,11 +101,13 @@ int main()
 
                         // Affichage des étudiants non marqués présents
                         printf("Liste des étudiants non marqués présents :\n");
+                        printf("ID\tPrénom\t\tNom\t\tClasse\n");
+                        printf("---------------------------------------------\n");
                         for (int i = 0; i < numEtudiants; i++)
                         {
                             if (!etudiants[i].present)
                             {
-                                printf("%d. %s\n", etudiants[i].id, etudiants[i].nom);
+                                printf("%d\t%s\t\t%s\t\t%s\n", etudiants[i].id, etudiants[i].prenom, etudiants[i].nom, etudiants[i].classe);
                             }
                         }
 
@@ -166,6 +169,8 @@ int main()
 
                             //* / Convertir la chaîne en entier
                             idEtudiant = atoi(choix1);
+                            printf("la valeur de idEtudiant est : %d\n", idEtudiant);
+                            printf("la valeur de userID est : %d\n", userID);
 
                             // Vérifier si l'ID étudiant appartient à l'utilisateur connecté
                             if (userID == idEtudiant)
@@ -200,6 +205,8 @@ int main()
                 } while (choix != 4);
             }
         }
+
     } while (1);
+    reinitialiserPresenceEtudiants("etudiants.txt");
     return 0;
 }
